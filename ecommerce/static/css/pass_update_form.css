@@ -1,0 +1,48 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: hsl(0, 0%, 98%);
+    text-align:justified;
+
+}
+
+.btn-link,
+.btn-link:hover,
+.hello-msg{
+    font-size: 16px;
+    color:black;
+}
+
+.btn,
+.bt-dark{
+	border-radius: 0.1em/0.1em;
+}
+
+.user_card {
+    width: 600px;
+    margin-bottom: auto;
+    background: hsl(0, 0%, 98%);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius:4px 4px 4px 4px;
+}
+
+.input-group {
+    display: flex;
+    width: 280px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+.list{
+    display: flex;
+    text-align:justified;
+
+}

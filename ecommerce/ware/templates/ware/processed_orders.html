@@ -1,0 +1,37 @@
+{% extends 'ware/main_ware.html' %}
+{% load static %}
+{% block content %}
+<div class="row-orders">
+    {% if group == 'admin' or group == 'employees'%}
+    <a class="btn btn-success" href="{% url 'orders' %}" style="float:right">Pedidos Pendientes</a>
+    {% endif %}
+    {% if group == 'customers'%}
+    <a class="btn btn-dark" href="{% url 'set_profile' %}">&#8592;Atras</a>
+    {% endif %}
+    <div class="title"><h2>Pedidos Procesados</h2></div>
+    <br>
+    <div class="orders-id-list">
+        <div class="col-left-title"><strong>Pedido N°</strong></div>
+        <div class="col-center-title"><strong>Nombre</strong></div>
+        <div class="col-right-title"><strong>Fecha de Compra</strong></div>
+    </div>
+    {% if orders %}
+    {% for order in orders %}
+    {% if order.processed == True and order.complete == True %}
+    <div class="orders-id-list">
+        <div class="col-left-d">
+            <div class="center"><strong><p>{{order.transaction_id}}</p></strong></div>
+        </div>
+        <div class="col-center-d">
+            <div class="center"><strong><p>{{order.customer}}</p></strong></div>
+        </div>
+        <div class="col-right-d">
+            <div class="center"><strong><p>{{order.date}}</p></strong></div>
+        </div>
+        <a class="btn btn-success" href="{% url 'details' order.transaction_id %}" style="float:right">Ver Pedido</a>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock content %}

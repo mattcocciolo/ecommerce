@@ -1,0 +1,35 @@
+{% extends 'ware/main_ware.html' %}
+{% load static %}
+{% block content %}
+<div class="row-orders">
+    <a class="btn btn-success" href="{% url 'ware' %}" style="float:left">Atras</a>
+    <a class="btn btn-success" href="{% url 'processed_orders' %}" style="float:right">Pedidos Procesados</a>
+    <div class="title"><h2>Pedidos del Almacen</h2></div>
+    <br>
+    <div class="orders-id-list">
+        <div class="col-left-tit"><strong>Pedido N°</strong></div>
+        <div class="col-center-tit"><strong>Nombre</strong></div>
+        <div class="col-right-tit"><strong>Fecha de Compra</strong></div>
+    </div>
+    {% if orders %}
+    {% for order in orders %}
+    {% if order.processed == False and order.complete == True %}
+    <div class="orders-id-list">
+        <div class="col-left">
+            <div class=" center-link alert alert-info" role="alert">
+                <a class="alert-link"
+                   href="{% url 'process_orders' order.transaction_id %}">{{order.transaction_id}}</a>
+            </div>
+        </div>
+        <div class="col-center">
+            <div class="center"><strong><p>{{order.customer}}</p></strong></div>
+        </div>
+        <div class="col-right">
+            <div class="center"><strong><p>{{order.date}}</p></strong></div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock content %}

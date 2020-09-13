@@ -1,0 +1,68 @@
+{% load static %}
+<html>
+<head>
+	<title>Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link href="{% static 'css/forms.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<h3 id="form-title">Registro de Cuenta</h3>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+					<form method="POST" action="">
+						{% csrf_token %}
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							{{form.username}}
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-envelope"></i></span>
+							</div>
+							{{form.email}}
+						</div>
+
+						<div class="input-group mb-3" >
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+								<div id="show_hide_password1">
+									{{form.password1}}
+								<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+
+								</div>
+						</div>
+						<div class="input-group mb-3" >
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+								<div id="show_hide_password2">
+									{{form.password2}}
+									<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+								</div>
+						</div>
+
+				   		<div class="d-flex justify-content-center mt-3 login_container">
+				 			<input class="btn login_btn" type="submit" value="Registrar Cuenta">
+				   		</div>
+					</form>
+				</div>
+				{{form.errors}}
+				<div class="mt-4">
+					<div class="d-flex justify-content-center links">
+						Tienes Una Cuenta? <a href="{% url 'login' %}" class="ml-2">Iniciar Sesion</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript" src="{% static 'js/register.js' %}"></script>
+</body>
+</html>

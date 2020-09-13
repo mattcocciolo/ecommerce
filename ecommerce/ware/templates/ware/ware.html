@@ -1,0 +1,17 @@
+{% extends 'ware/main_ware.html' %}
+{% load static %}
+{% block content %}
+<div class="row-orders">
+    <div class="title"><h2>Panel de Control...</h2></div>
+    <br>
+    <div class="row-orders">
+        <a class="btn btn-success" href="{% url 'orders' %}" style="float:right">Ver</a>
+        <div class="title"><h4>Pedidos Pendientes</h4></div>
+    </div>
+    <br>
+    <div class="row-orders">
+        <a class="btn btn-success" href="{% url 'processed_orders' %}" style="float:right">Ver</a>
+        <div class="title"><h4>Pedidos Procesados</h4></div>
+    </div>
+</div>
+{% endblock content %}
