@@ -26,6 +26,14 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def image_url(self):
+        try:
+            url = self.image.url
+        except ImportError:
+            url = ''
+        return url
+
 
 class ProductImages(models.Model):
     product = models.ForeignKey(Product, default=None, on_delete=models.CASCADE)

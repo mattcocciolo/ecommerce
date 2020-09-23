@@ -22,7 +22,6 @@ urlpatterns = [
     path('profile_orders/', views.profile_orders, name="profile_orders"),
     path('profile_passwd_update/', views.profile_passwd_update, name="profile_passwd_update"),
 
-
     # Authentication
     path('register/', views.register_page, name="register"),
     path('login/', views.login_page, name="login"),
@@ -40,7 +39,6 @@ urlpatterns = [
 
     path('password_reset_complete', auth_views.PasswordResetCompleteView.as_view(
         template_name='store/password_reset_complete.html'), name='password_reset_complete'),
-
 
     # Register, activation email.
     url(r'^account_activation_finish/$', core_views.account_activation_finish,

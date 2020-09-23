@@ -4,7 +4,9 @@ import json
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import logout
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import Group
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
@@ -19,8 +21,6 @@ from .forms import CreateUserForm, CustomerForm, ShippingForm
 from .models import *
 from .tokens import account_activation_token
 from .utils import cartdata, guest_order
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
 
 
 @unauthenticated_user

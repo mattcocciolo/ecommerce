@@ -44,12 +44,12 @@ function imageZoom(imgID){
             positionTop = 0
         }
 
-        if (positionLeft > img.width - lens.offsetWidth / 3){
-            positionLeft = img.width -lens.offsetWidth / 3
+        if (positionLeft > img.width - lens.offsetWidth / 2){
+            positionLeft = img.width -lens.offsetWidth / 2
         }
 
-        if (positionTop > img.height - lens.offsetHeight / 3){
-            positionTop = img.height - lens.offsetHeight / 3
+        if (positionTop > img.height - lens.offsetHeight / 2){
+            positionTop = img.height - lens.offsetHeight / 2
         }
 
         //3 -

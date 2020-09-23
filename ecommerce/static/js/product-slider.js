@@ -5,7 +5,7 @@
 
     for (var i=0; i < thumbnails.length; i++){
 
-        thumbnails[i].addEventListener('click', function(){
+        thumbnails[i].addEventListener('mouseover', function(){
             console.log(activeImages)
 
             if (activeImages.length > 0){
