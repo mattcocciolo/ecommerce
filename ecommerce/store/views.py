@@ -192,7 +192,7 @@ def set_profile(request):
 
 def profile_ship(request):
     customer = request.user.customer
-    ship = ShippingAddress.objects.get(customer=customer)
+    ship, create = ShippingAddress.objects.get_or_create(customer=customer)
     if request.method == "POST":
         form = ShippingForm(request.POST, instance=ship)
         if form.is_valid():
