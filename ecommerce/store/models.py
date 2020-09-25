@@ -7,6 +7,7 @@ from django.db import models
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200, null=True)
+    first_name = models.CharField(max_length=200, null=True)
     last_name = models.CharField(max_length=200, null=True)
     email = models.EmailField(max_length=254, null=True)
     profile_picture = models.ImageField(blank=False, default="person-circle.png", null=False)
