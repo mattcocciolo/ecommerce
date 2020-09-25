@@ -32,8 +32,8 @@ function imageZoom(imgID){
         //console.log('pos:', pos)
 
         //2 -
-        let positionLeft = pos.x - (lens.offsetWidth / 3)
-        let positionTop = pos.y - (lens.offsetHeight / 3)
+        let positionLeft = pos.x - (lens.offsetWidth / 4)
+        let positionTop = pos.y - (lens.offsetHeight / 4)
 
         //5 -
         if (positionLeft < 0){
