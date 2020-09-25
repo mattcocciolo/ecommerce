@@ -22,10 +22,11 @@ class CreateUserForm(UserCreationForm):
             'email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email...'}),
         }
 
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder':
-        'Password...'}))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder':
-        'Confirmar Password...'}))
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password...'}))
+
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirmar Password...'}))
 
 
 class CustomerForm(ModelForm):

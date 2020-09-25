@@ -12,45 +12,63 @@
 <body>
 	<div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
-			<div class="user_card">
+			<div class="user_card_register">
 				<div class="d-flex justify-content-center">
 					<h3 id="form-title">Registro de Cuenta</h3>
 				</div>
 				<div class="d-flex justify-content-center form_container">
 					<form method="POST" action="">
 						{% csrf_token %}
+						<div class="form-title">
+							<h6>Escriba un nombre de Usuario, su Email y una Contraseña tenga en cuenta que la misma:</h6>
+						</div>
+						<div class="text-list">
+							<ul>
+								<li>No debe ser similar a su informacion de usuario.</li>
+								<li>Debe tener al menos 8 caracteres.</li>
+								<li>No puede ser una contraseña de uso comun.</li>
+								<li>No puede ser completamente numerica.</li>
+							</ul>
+						</div>
+						<hr>
+						<br>
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
+								{{form.username}}
 							</div>
-							{{form.username}}
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-envelope"></i></span>
+								{{form.email}}
 							</div>
-							{{form.email}}
 						</div>
 
-						<div class="input-group mb-3" >
+						<div class="input-group mb-3">
+							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 								<div id="show_hide_password1">
 									{{form.password1}}
-								<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-
+									<span toggle="#password-field"
+										  class="fa fa-fw fa-eye field-icon toggle-password"></span>
 								</div>
+							</div>
 						</div>
-						<div class="input-group mb-3" >
+
+						<div class="input-group mb-3">
+							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 								<div id="show_hide_password2">
 									{{form.password2}}
-									<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+									<span toggle="#password-field"
+										  class="fa fa-fw fa-eye field-icon toggle-password"></span>
 								</div>
+							</div>
 						</div>
-
-				   		<div class="d-flex justify-content-center mt-3 login_container">
-				 			<input class="btn btn-dark" type="submit" value="Registrar Cuenta">
-				   		</div>
+						<div class="d-flex justify-content-center mt-3 login_container">
+							<input class="btn btn-dark" type="submit" value="Registrar Cuenta">
+						</div>
 					</form>
 				</div>
 				{{form.errors}}
