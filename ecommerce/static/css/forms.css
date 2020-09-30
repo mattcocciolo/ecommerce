@@ -99,7 +99,8 @@ a, a:hover{
 }
 .btn-link,
 .btn-link:hover,
-.hello-msg{
+.hello-msg
+{
     font-size: 16px;
     color:black;
 }
@@ -108,9 +109,11 @@ a, a:hover{
 
 }
 .user_card_register {
-    width: 500px;
+    width: 600px;
     margin-top: 20px;
     margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
     background: hsl(0, 0%, 98%);
     /*background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));*/
     position: relative;
@@ -132,8 +135,9 @@ a, a:hover{
 }
 
 .text-list{
-    width:400px;
-    margin-left: 40px;
+    display: flex;
+    justify-content:center;
+    font-size: x-small;
 
 }
 
@@ -141,6 +145,8 @@ a, a:hover{
     width: 350px;
     margin-top: 20px;
     margin-bottom: auto;
+    margin-left:auto;
+    margin-right:auto;
     background: hsl(0, 0%, 98%);
     /*background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));*/
     position: relative;
@@ -152,4 +158,24 @@ a, a:hover{
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius:4px 4px 4px 4px;
+}
+.title{
+    display: flex;
+    justify-content:center;
+}
+
+.row-form{
+    display: flex;
+}
+
+.row-form2{
+    display: flex;
+    justify-content:center;
+}
+.input-group-append-2{
+    width:auto;
+    height:38px;
+    margin-left: 1.2em;
+    margin-right: 1.2em;
+
 }

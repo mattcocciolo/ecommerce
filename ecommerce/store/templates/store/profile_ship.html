@@ -10,8 +10,16 @@
             <h6 ALIGN="center"><strong>Importante: </strong> Verifique que sea correcta y mantenga actualizada su informacion.</h6>
             <hr>
 		<div class="col-lg-5 center-form">
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="" enctype="multipart/form-data" >
                 {% csrf_token %}
+                <div class="form-field">
+                    <p>Nombre:</p>
+                    {{form2.first_name}}
+                </div>
+                <div class="form-field">
+                    <p>Apellido:</p>
+                    {{form2.last_name}}
+                </div>
                 <div class="form-field">
                     <p>Direccion:</p>
                     {{form.address}}

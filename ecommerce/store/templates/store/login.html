@@ -12,11 +12,16 @@
 </head>
 <body>
 <div class="container h-100">
-    <br>
-    <div class="col-lg-12">
+<br>
+<ul class="nav nav nav-fill">
+    <li class="nav-item">
         <a class="btn btn-dark" href="{% url 'store' %}">&#8592;Atras</a>
-        <hr>
-    </div>
+    </li>
+    <li class="nav-item">
+        ¿No tienes Una Cuenta? <a href="{% url 'register' %}" class="ml-2"><strong>Registrate</strong></a>
+    </li>
+</ul>
+<hr>
     <div class="d-flex justify-content-center h-100">
         <div class="user-card-login">
             <div class="d-flex justify-content-center">
@@ -28,7 +33,7 @@
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            <input class="form-control" name="username" placeholder="Usuario..." type="text">
+                            <input class="form-control" name="username" placeholder="Nombre de Usuario..." type="text">
                         </div>
                     </div>
                     <div class="input-group mb-3">
@@ -37,7 +42,7 @@
 
                             <div class="input-group-addon">
                                 <input id="password-field" type="password" class="form-control" name="password"
-                                       placeholder="Password...">
+                                       placeholder="Contraseña...">
                                 <span toggle="#password-field"
                                       class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             </div>
@@ -56,9 +61,6 @@
             {% endfor %}
 
             <div class="mt-4">
-                <div class="d-flex justify-content-center links mt-3">
-                    ¿No tienes Una Cuenta? <a href="{% url 'register' %}" class="ml-2"><strong>Registrate</strong></a>
-                </div>
                 <div class="d-flex justify-content-center links mb-3">
                     Olvide mi<a href="{% url 'password_reset' %}" class="ml-2"><strong>Contraseña</strong></a>
                 </div>

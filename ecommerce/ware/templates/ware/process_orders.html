@@ -59,7 +59,14 @@
             <div id="user-info">
                 <h3>Informacion Personal</h3>
                 <hr>
-                <strong>Nombre:</strong> {{order.customer}}
+                <div class="col-lg-6">
+                    <img class="row-image-order" src={{order.customer.profile_picture.url}}>
+                </div>
+                <strong>Usuario:</strong> {{order.customer}}
+                <br>
+                <strong>Nombre:</strong> {{order.customer.first_name}}
+                <br>
+                <strong>Apellido:</strong> {{order.customer.last_name}}
                 <br>
                 <strong>Email:</strong> {{order.customer.email}}
             </div>

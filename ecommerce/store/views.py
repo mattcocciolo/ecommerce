@@ -17,7 +17,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from ware.decorators import unauthenticated_user, allowed_users
 
-from .forms import CreateUserForm, CustomerForm, ShippingForm
+from .forms import CreateUserForm, CustomerForm, ShippingForm, CustomerForm2
 from .models import *
 from .tokens import account_activation_token
 from .utils import cartdata, guest_order
@@ -30,19 +30,9 @@ def register_page(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False
+            user.is_active = True
             user.save()
-            current_site = get_current_site(request)
-            email_subject = 'Activar Tu Cuenta de Usuario de Shop'
-            message = render_to_string('store/account_activation_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-            to_email = form.cleaned_data.get('email')
-            email = EmailMessage(email_subject, message, to=[to_email])
-            email.send()
+
             user = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
             customer, created = Customer.objects.get_or_create(email=email)
@@ -53,7 +43,7 @@ def register_page(request):
             new_user.groups.add(group)
             customer.email = email
             customer.save()
-            return render(request, 'store/account_activation_sent.html')
+            return render(request, 'store/login.html')
     context = {'form': form}
     return render(request, 'store/register.html', context)
 
@@ -178,6 +168,7 @@ def processorder(request):
 def set_profile(request):
     customer = request.user.customer
     form = CustomerForm(instance=customer)
+
     if request.method == "POST":
         form = CustomerForm(request.POST, request.FILES, instance=customer)
         if form.is_valid():
@@ -193,22 +184,29 @@ def set_profile(request):
 def profile_ship(request):
     customer = request.user.customer
     ship, create = ShippingAddress.objects.get_or_create(customer=customer)
+    form2 = CustomerForm2(instance=customer)
+
     if request.method == "POST":
         form = ShippingForm(request.POST, instance=ship)
-        if form.is_valid():
+        form2 = CustomerForm2(request.POST, request.FILES, instance=customer)
+        if form.is_valid() and form2.is_valid():
             ship.save()
+            form.save()
+            form2.save()
             return redirect('set_profile')
     else:
         form = ShippingForm(instance=ship)
+
     data = cartdata(request)
     cartitems = data['cartitems']
     order = data['order']
     items = data['items']
-    context = {'items': items, 'order': order, 'cartitems': cartitems, 'form': form}
+    context = {'items': items, 'order': order, 'cartitems': cartitems, 'form': form, 'form2': form2}
     return render(request, 'store/profile_ship.html', context)
 
 
 def profile_orders(request):
+
     order_profile = Order.objects.all()
     data = cartdata(request)
     cartitems = data['cartitems']

@@ -1,4 +1,4 @@
-{% extends 'store/main.html' %}
+{% extends 'ware/main_ware.html' %}
 {% load static %}
 {% block content %}
 <div class="box-element">
@@ -22,6 +22,7 @@
             {% if orders_profiles %}
             {% for order_profile in orders_profiles %}
             {% if order_profile.processed == True and order_profile.complete == True %}
+            {% if order_profile.customer.name == order.customer.name %}
             <div class="orders-id-list">
                 <div class="col-left-d">
                     <div class="center"><strong><p>{{order_profile.transaction_id}}</p></strong></div>
@@ -35,6 +36,7 @@
                 <a style="float:right" class="btn btn-success" href="{% url 'details' order_profile.transaction_id%}">Ver
                     Pedido</a>
             </div>
+            {% endif %}
             {% endif %}
             {% endfor %}
             {% endif %}

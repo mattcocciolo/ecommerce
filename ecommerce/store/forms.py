@@ -41,3 +41,9 @@ class ShippingForm(ModelForm):
         model = ShippingAddress
         fields = '__all__'
         exclude = ['customer', 'order']
+
+
+class CustomerForm2(ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['first_name', 'last_name']
