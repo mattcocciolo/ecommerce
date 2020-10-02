@@ -212,15 +212,11 @@ def set_profile(request):
 def profile_ship(request):
     customer = request.user.customer
     ship, create = ShippingAddress.objects.get_or_create(customer=customer)
-    form2 = CustomerForm2(instance=customer)
-
     if request.method == "POST":
         form = ShippingForm(request.POST, instance=ship)
-        form2 = CustomerForm2(request.POST, request.FILES, instance=customer)
-        if form.is_valid() and form2.is_valid():
+        if form.is_valid():
             ship.save()
             form.save()
-            form2.save()
             return redirect('set_profile')
     else:
         form = ShippingForm(instance=ship)
@@ -229,7 +225,7 @@ def profile_ship(request):
     cartitems = data['cartitems']
     order = data['order']
     items = data['items']
-    context = {'items': items, 'order': order, 'cartitems': cartitems, 'form': form, 'form2': form2}
+    context = {'items': items, 'order': order, 'cartitems': cartitems, 'form': form}
     return render(request, 'store/profile_ship.html', context)
 
 

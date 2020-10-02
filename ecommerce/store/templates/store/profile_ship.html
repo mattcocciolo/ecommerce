@@ -12,14 +12,6 @@
             <form method="POST" action="" enctype="multipart/form-data" >
                 {% csrf_token %}
                 <div class="form-field">
-                    <p>Nombre:</p>
-                    {{form2.first_name}}
-                </div>
-                <div class="form-field">
-                    <p>Apellido:</p>
-                    {{form2.last_name}}
-                </div>
-                <div class="form-field">
                     <p>Direccion:</p>
                     {{form.address}}
                 </div>
