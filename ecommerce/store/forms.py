@@ -52,11 +52,3 @@ class ShippingForm(ModelForm):
         }
 
 
-class CustomerForm2(ModelForm):
-    class Meta:
-        model = Customer
-        fields = ['first_name', 'last_name']
-        widgets = {
-                    'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre...'}),
-                    'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apellido...'}),
-                }

@@ -17,7 +17,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from ware.decorators import unauthenticated_user, allowed_users
 
-from .forms import CreateUserForm, CustomerForm, ShippingForm, CustomerForm2
+from .forms import CreateUserForm, CustomerForm, ShippingForm
 from .models import *
 from .tokens import account_activation_token
 from .utils import cartdata, guest_order
