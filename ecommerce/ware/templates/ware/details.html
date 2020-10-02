@@ -4,7 +4,12 @@
 <div class="row">
 	<div class="col-lg-6">
 		<div class="box-element">
-			<a class="btn btn-dark" href="{% url 'processed_orders'%}">Atras</a>
+			{% if group == 'admin' or group == 'employees'%}
+			<a class="btn btn-dark" href="{% url 'processed_orders' %}">Atras</a>
+			{% endif %}
+			{% if group == 'customers'%}
+			<a class="btn btn-dark" href="{% url 'profile_orders' %}">&#8592;Atras</a>
+			{% endif %}
 			<hr>
 			<h3>Resumen del Pedido</h3>
 			<hr>

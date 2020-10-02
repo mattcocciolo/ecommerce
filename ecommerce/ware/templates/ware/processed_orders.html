@@ -5,9 +5,6 @@
     {% if group == 'admin' or group == 'employees'%}
     <a class="btn btn-success" href="{% url 'orders' %}" style="float:right">Pedidos Pendientes</a>
     {% endif %}
-    {% if group == 'customers'%}
-    <a class="btn btn-dark" href="{% url 'set_profile' %}">&#8592;Atras</a>
-    {% endif %}
     <div class="title"><h2>Pedidos Procesados</h2></div>
     <br>
     <div class="orders-id-list">

@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="box-element">
+    
     <a class="btn btn-dark" href="{% url 'set_profile' %}">&#8592;Atras</a>
     <br>
     <div class="col-lg-8 center-form-tit">
@@ -33,6 +34,7 @@
                 <div class="col-right-d">
                     <div class="center"><strong><p>{{order_profile.date}}</p></strong></div>
                 </div>
+
                 <a style="float:right" class="btn btn-success" href="{% url 'details' order_profile.transaction_id%}">Ver
                     Pedido</a>
             </div>

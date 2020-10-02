@@ -15,11 +15,13 @@ class OrderForm(ModelForm):
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name']
 
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Usuario...'}),
             'email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email...'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre...'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apellido...'}),
         }
 
     password1 = forms.CharField(
@@ -41,9 +43,20 @@ class ShippingForm(ModelForm):
         model = ShippingAddress
         fields = '__all__'
         exclude = ['customer', 'order']
+        widgets = {
+            'address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Direccion...'}),
+            'city': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ciudad...'}),
+            'state': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Provincia...'}),
+            'zipcode': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Codigo Postal...'}),
+            'country': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Pais...'}),
+        }
 
 
 class CustomerForm2(ModelForm):
     class Meta:
         model = Customer
         fields = ['first_name', 'last_name']
+        widgets = {
+                    'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre...'}),
+                    'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apellido...'}),
+                }

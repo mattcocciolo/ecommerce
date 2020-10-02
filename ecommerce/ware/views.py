@@ -46,10 +46,15 @@ def processed_orders(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'employees', 'customers'])
 def details(request, pk_transaction_id):
+    group = None
+    if request.user.groups.exists():
+        group = request.user.groups.all()[0].name
+        print(group)
+
     order = Order.objects.filter(transaction_id=pk_transaction_id)
     item = OrderItem.objects.filter()
     ship = ShippingAddress.objects.all()
-    context = {'orders': order, 'items': item, 'ships': ship}
+    context = {'orders': order, 'items': item, 'ships': ship, 'group': group}
     return render(request, 'ware/details.html', context)
 
 

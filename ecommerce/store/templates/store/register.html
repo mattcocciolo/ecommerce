@@ -20,15 +20,26 @@
     <div class="title">
         <h3 id="title">Registro de Cuenta</h3>
     </div>
-            <div class="text-list">
-            <ul>
-                <label>¡ATENCION! Su Contraseña:</label>
-                <li>No debe ser similar a su informacion de usuario.</li>
-                <li>Debe tener al menos 8 caracteres.</li>
-                <li>No puede ser una contraseña de uso comun.</li>
-                <li>No puede ser completamente numerica.</li>
-            </ul>
-        </div>
+    <div class="text-list">
+        <p>¡ADVERTENCIA! Su contraseña:</p>
+        <ul>
+            <li>No debe ser similar a su informacion de usuario.</li>
+            <li>Debe tener al menos 8 caracteres.</li>
+            <li>No puede ser una contraseña de uso comun.</li>
+            <li>No puede ser completamente numerica.</li>
+        </ul>
+    </div>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <h6 {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</h6>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h6>{{form.errors}}</h6>
+
     <form method="POST" action="" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row-form">
@@ -73,14 +84,14 @@
             <div class="input-group mb-3">
                 <div class="input-group-append">
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    {{form2.first_name}}
+                    {{form.first_name}}
                 </div>
             </div>
             <br>
             <div class="input-group mb-3">
                 <div class="input-group-append">
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    {{form2.last_name}}
+                    {{form.last_name}}
                 </div>
             </div>
         </div>
@@ -89,27 +100,27 @@
         <div class="column2">
             <div class="input-group-append-2 input-group-append">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
-                {{form3.address}}
+                {{form_ship.address}}
             </div>
             <br>
             <div class="input-group-append-2 input-group-append">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
-                {{form3.city}}
+                {{form_ship.city}}
             </div>
             <br>
             <div class="input-group-append-2 input-group-append">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
-                {{form3.state}}
+                {{form_ship.state}}
             </div>
             <br>
             <div class="input-group-append-2 input-group-append">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
-                {{form3.zipcode}}
+                {{form_ship.zipcode}}
             </div>
             <br>
             <div class="input-group-append-2 input-group-append">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
-                {{form3.country}}
+                {{form_ship.country}}
             </div>
             <br>
             <div class="d-flex justify-content-center mt-3 login_container">

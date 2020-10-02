@@ -25,26 +25,47 @@ from .utils import cartdata, guest_order
 
 @unauthenticated_user
 def register_page(request):
+
     form = CreateUserForm()
+    form_ship = ShippingForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
+        form_ship = ShippingForm(request.POST)
+        if form.is_valid() and form_ship.is_valid():
+            user = form.save(commit=True)
             user.is_active = True
-            user.save()
 
             user = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
-            customer, created = Customer.objects.get_or_create(email=email)
-            new_user = form.save()
-            customer.user = new_user
-            customer.name = user
-            group = Group.objects.get(name='customers')
-            new_user.groups.add(group)
-            customer.email = email
-            customer.save()
-            return render(request, 'store/login.html')
-    context = {'form': form}
+
+            if Customer.objects.filter(email=email).exists():
+                messages.info(request, '¡ADVERTENCIA! Email ya registrado, por favor ingrese uno valido')
+            else:
+                form.save()
+                customer, created = Customer.objects.get_or_create(email=email)
+
+                new_user = form.save()
+                customer.user = new_user
+                customer.name = user
+
+                new_customer = form.save()
+                customer.first_name = new_customer.first_name
+                customer.last_name = new_customer.last_name
+
+                group = Group.objects.get(name='customers')
+                new_user.groups.add(group)
+
+                customer.email = email
+                customer.save()
+
+                p = form_ship.save()
+                ship = ShippingAddress.objects.get(customer=p.customer)
+                p.customer = customer
+                ship.save()
+                form_ship.save()
+
+                return render(request, 'store/account_activation_sent.html')
+    context = {'form': form, 'form_ship': form_ship}
     return render(request, 'store/register.html', context)
 
 
@@ -207,7 +228,7 @@ def profile_ship(request):
 
 def profile_orders(request):
 
-    order_profile = Order.objects.all()
+    order_profile = Order.objects.filter()
     data = cartdata(request)
     cartitems = data['cartitems']
     order = data['order']
