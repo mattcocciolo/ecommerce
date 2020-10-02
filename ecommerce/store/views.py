@@ -25,46 +25,53 @@ from .utils import cartdata, guest_order
 
 @unauthenticated_user
 def register_page(request):
-
     form = CreateUserForm()
     form_ship = ShippingForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         form_ship = ShippingForm(request.POST)
         if form.is_valid() and form_ship.is_valid():
-            user = form.save(commit=True)
-            user.is_active = True
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+
+            current_site = get_current_site(request)
+            email_subject = 'Activar Tu Cuenta de Usuario de Shop'
+            message = render_to_string('store/account_activation_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
+            })
+            to_email = form.cleaned_data.get('email')
+            email = EmailMessage(email_subject, message, to=[to_email])
+            email.send()
 
             user = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
+            customer, created = Customer.objects.get_or_create(email=email)
 
-            if Customer.objects.filter(email=email).exists():
-                messages.info(request, '¡ADVERTENCIA! Email ya registrado, por favor ingrese uno valido')
-            else:
-                form.save()
-                customer, created = Customer.objects.get_or_create(email=email)
+            new_user = form.save()
+            customer.user = new_user
+            customer.name = user
 
-                new_user = form.save()
-                customer.user = new_user
-                customer.name = user
+            new_customer = form.save()
+            customer.first_name = new_customer.first_name
+            customer.last_name = new_customer.last_name
 
-                new_customer = form.save()
-                customer.first_name = new_customer.first_name
-                customer.last_name = new_customer.last_name
+            group = Group.objects.get(name='customers')
+            new_user.groups.add(group)
 
-                group = Group.objects.get(name='customers')
-                new_user.groups.add(group)
+            customer.email = email
+            customer.save()
 
-                customer.email = email
-                customer.save()
+            ship_add = form_ship.save()
+            ship = ShippingAddress.objects.get(customer=ship_add.customer)
+            ship_add.customer = customer
+            ship.save()
+            form_ship.save()
 
-                p = form_ship.save()
-                ship = ShippingAddress.objects.get(customer=p.customer)
-                p.customer = customer
-                ship.save()
-                form_ship.save()
-
-                return render(request, 'store/account_activation_sent.html')
+            return render(request, 'store/account_activation_sent.html')
     context = {'form': form, 'form_ship': form_ship}
     return render(request, 'store/register.html', context)
 

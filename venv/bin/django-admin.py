@@ -1,4 +1,4 @@
-#!/home/mcocciolo/PycharmProjects/ecommerce_1.2/venv/bin/python
+#!/home/mcocciolo/PycharmProjects/ecommerce_1.2(bug)/venv/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

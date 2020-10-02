@@ -51,4 +51,5 @@ urlpatterns = [
         name='account_activation_sent'),
 
     path('activate/<uidb64>/<token>/', core_utils.activate, name='activate'),
+
 ]
