@@ -22,7 +22,6 @@ from .models import *
 from .tokens import account_activation_token
 from .utils import cartdata, guest_order
 
-
 @unauthenticated_user
 def register_page(request):
     form = CreateUserForm()

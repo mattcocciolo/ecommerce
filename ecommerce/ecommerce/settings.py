@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'ware.apps.WareConfig',
     'crispy_forms',
     'events',
+    'debug_toolbar',
 
 ]
 
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
@@ -129,3 +131,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'matiasdjangosmtp@gmail.com'
 EMAIL_HOST_PASSWORD = 'matias3063240'
 
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
+]
