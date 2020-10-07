@@ -5,12 +5,12 @@
     <a class="btn btn-dark" href="{% url 'set_profile' %}">&#8592;Atras</a>
     <br>
     <div class="col-lg-8 center-form-tit">
-            <hr>
-            <h6 ALIGN="center"><strong>Importante: </strong>
-                Verifique que sea correcta y mantenga actualizada su informacion.</h6>
-            <hr>
-		<div class="col-lg-5 center-form">
-            <form method="POST" action="" enctype="multipart/form-data" >
+        <hr>
+        <h6 ALIGN="center"><strong>Importante: </strong>
+            Verifique que sea correcta y mantenga actualizada su informacion.</h6>
+        <hr>
+        <div class="col-lg-5 center-form">
+            <form method="POST" action="" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-field">
                     <p>Direccion:</p>

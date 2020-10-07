@@ -22,6 +22,7 @@ from .models import *
 from .tokens import account_activation_token
 from .utils import cartdata, guest_order
 
+
 @unauthenticated_user
 def register_page(request):
     form = CreateUserForm()
@@ -140,11 +141,24 @@ def cart(request):
 
 
 def checkout(request):
+    form = ShippingForm(request.POST)
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        ship, create = ShippingAddress.objects.filter(customer=customer)
+        if request.method == "POST":
+            form = ShippingForm(request.POST, instance=ship)
+            if form.is_valid():
+                ship.save()
+                form.save()
+                return redirect('checkout')
+        else:
+            form = ShippingForm(instance=ship)
+
     data = cartdata(request)
     cartitems = data['cartitems']
     order = data['order']
     items = data['items']
-    context = {'items': items, 'order': order, 'cartitems': cartitems}
+    context = {'items': items, 'order': order, 'cartitems': cartitems, 'form': form}
     return render(request, 'store/checkout.html', context)
 
 
@@ -190,6 +204,7 @@ def processorder(request):
             city=data['shipping']['city'],
             state=data['shipping']['state'],
             zipcode=data['shipping']['zipcode'],
+            country=data['shipping']['country']
         )
     return JsonResponse('Pago Enviado...', safe=False)
 
@@ -214,7 +229,7 @@ def set_profile(request):
 
 def profile_ship(request):
     customer = request.user.customer
-    ship, create = ShippingAddress.objects.get_or_create(customer=customer)
+    ship, create = ShippingAddress.objects.filter(customer=customer)
     if request.method == "POST":
         form = ShippingForm(request.POST, instance=ship)
         if form.is_valid():
