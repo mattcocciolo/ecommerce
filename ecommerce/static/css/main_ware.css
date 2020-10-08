@@ -234,9 +234,12 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .col-right-d{
-    width:12em;
+    width:15em;
     flex-grow:1;
 }
 
-
+.col-right-processed{
+    width:10em;
+    flex-grow:0;
+}
 

@@ -2,27 +2,24 @@
 {% load static %}
 {% block content %}
 <div class="box-element">
-    
     <a class="btn btn-dark" href="{% url 'set_profile' %}">&#8592;Atras</a>
     <br>
-    <div class="col-lg-8 center-form-tit">
-
+    <div class="col-lg-12 center-form-tit">
         <hr>
         <strong><h4 ALIGN="center">Nombre de Usuario: {{request.user.username}}</h4></strong>
         <hr>
-
         <div class="row-orders">
-            <a style="float:right" class="btn btn-success" href="{% url 'orders' %}">Pedidos Pendientes</a>
-            <div class="title"><h2>Pedidos Procesados</h2></div>
+            <div class="title"><h2>Pedidos Realizados</h2></div>
             <br>
             <div class="orders-id-list">
                 <div class="col-left-title"><strong>Pedido N°</strong></div>
                 <div class="col-center-title"><strong>Nombre</strong></div>
                 <div class="col-right-title"><strong>Fecha de Compra</strong></div>
+                <div class="col-right-title"><strong>Estado</strong></div>
             </div>
             {% if orders_profiles %}
             {% for order_profile in orders_profiles %}
-            {% if order_profile.processed == True and order_profile.complete == True %}
+            {% if order_profile.complete == True %}
             {% if order_profile.customer.name == order.customer.name %}
             <div class="orders-id-list">
                 <div class="col-left-d">
@@ -34,7 +31,13 @@
                 <div class="col-right-d">
                     <div class="center"><strong><p>{{order_profile.date}}</p></strong></div>
                 </div>
-
+                <div class="col-right-processed">
+                    {% if order_profile.processed == False %}
+                    <div class="center"><strong><p>No Procesado</p></strong></div>
+                    {% elif order_profile.processed == True %}
+                    <div class="center"><strong><p>Procesado</p></strong></div>
+                    {%endif%}
+                </div>
                 <a style="float:right" class="btn btn-success" href="{% url 'details' order_profile.transaction_id%}">Ver
                     Pedido</a>
             </div>
