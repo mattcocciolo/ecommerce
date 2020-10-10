@@ -237,6 +237,8 @@ def set_profile(request):
     return render(request, 'store/set_profile.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customers'])
 def profile_ship(request):
     customer = request.user.customer
     ship, create = ShippingAddress.objects.get_or_create(customer=customer)
@@ -257,8 +259,9 @@ def profile_ship(request):
     return render(request, 'store/profile_ship.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customers'])
 def profile_orders(request):
-
     order_profile = Order.objects.filter()
     data = cartdata(request)
     cartitems = data['cartitems']
@@ -268,6 +271,8 @@ def profile_orders(request):
     return render(request, 'store/profile_orders.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customers'])
 def profile_passwd_update(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -289,6 +294,8 @@ def profile_passwd_update(request):
     return render(request, 'store/profile_passwd_update.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customers'])
 def product_details(request, pk_id):
     products = Product.objects.filter(id=pk_id)
     photos = ProductImages.objects.filter(product_id=pk_id)
