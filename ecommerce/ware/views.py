@@ -1,5 +1,4 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group, User
 from django.shortcuts import render, redirect
 from store.models import Order, OrderItem, ShippingAddress
 
@@ -24,8 +23,9 @@ def orders(request):
 @allowed_users(allowed_roles=['admin', 'employees'])
 def process_orders(request, pk_transaction_id):
     order = Order.objects.filter(transaction_id=pk_transaction_id)
-    item = OrderItem.objects.filter()
+    item = OrderItem.objects.all()
     ship = ShippingAddress.objects.all()
+
     context = {'orders': order, 'items': item, 'ships': ship}
     return render(request, 'ware/process_orders.html', context)
 
@@ -52,8 +52,9 @@ def details(request, pk_transaction_id):
         print(group)
 
     order = Order.objects.filter(transaction_id=pk_transaction_id)
-    item = OrderItem.objects.filter()
-    ship = ShippingAddress.objects.all()
+    customer = request.user.customer
+    item = OrderItem.objects.all()
+    ship = ShippingAddress.objects.filter(customer=customer)
     context = {'orders': order, 'items': item, 'ships': ship, 'group': group}
     return render(request, 'ware/details.html', context)
 

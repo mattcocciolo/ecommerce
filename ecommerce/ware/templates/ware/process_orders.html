@@ -62,19 +62,21 @@
                 <div class="col-lg-6">
                     <img class="row-image-order" src={{order.customer.profile_picture.url}}>
                 </div>
-                <strong>Usuario:</strong> {{order.customer}}
-                <br>
-                <strong>Nombre:</strong> {{order.customer.first_name}}
-                <br>
-                <strong>Apellido:</strong> {{order.customer.last_name}}
-                <br>
-                <strong>Email:</strong> {{order.customer.email}}
+                <div class="col-lg-12">
+                    <strong>Usuario:</strong> {{order.customer}}
+                    <br>
+                    <strong>Nombre:</strong> {{order.customer.first_name}}
+                    <br>
+                    <strong>Apellido:</strong> {{order.customer.last_name}}
+                    <br>
+                    <strong>Email:</strong> {{order.customer.email}}
+                </div>
             </div>
             {% endfor %}
 
-            {% for ship in ships%}
+            {% for ship in ships %}
             {% for order in orders %}
-            {% if ship.order.transaction_id == order.transaction_id %}
+            {% if ship.customer == order.customer %}
             {% if order.complete %}
             <div id="shipping-info">
                 <hr>
@@ -92,14 +94,15 @@
             </div>
             <hr>
             <div class="der">
-                <a class="btn btn-success" href="{%  url 'button_id' order.transaction_id %}" id="buttonId"
+                <a href="{%  url 'button_id' order.transaction_id %}" id="buttonId" class="btn btn-success"
                    type="submit">Finalizar</a>
             </div>
-        </div>
+       </div>
     </div>
     {% endif %}
     {% endif %}
     {% endfor %}
     {% endfor %}
 </div>
+
 {% endblock content %}

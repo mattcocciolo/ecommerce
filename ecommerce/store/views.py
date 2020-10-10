@@ -144,7 +144,7 @@ def checkout(request):
     form = ShippingForm(request.POST)
     if request.user.is_authenticated:
         customer = request.user.customer
-        ship, create = ShippingAddress.objects.filter(customer=customer)
+        ship, create = ShippingAddress.objects.get_or_create(customer=customer)
         if request.method == "POST":
             form = ShippingForm(request.POST, instance=ship)
             if form.is_valid():
@@ -190,14 +190,24 @@ def processorder(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
     else:
         customer, order = guest_order(request, data)
+        if order.shipping:
+            ShippingAddress.objects.get_or_create(
+                customer=customer,
+                order=order,
+                address=data['shipping']['address'],
+                city=data['shipping']['city'],
+                state=data['shipping']['state'],
+                zipcode=data['shipping']['zipcode'],
+                country=data['shipping']['country']
+            )
 
     total = float(data['form']['total'])
     order.transaction_id = transaction_id
     if total == float(order.get_cart_total):
         order.complete = True
     order.save()
-    if order.shipping:
-        ShippingAddress.objects.create(
+    '''if order.shipping:
+        ShippingAddress.objects.get_or_create(
             customer=customer,
             order=order,
             address=data['shipping']['address'],
@@ -205,7 +215,7 @@ def processorder(request):
             state=data['shipping']['state'],
             zipcode=data['shipping']['zipcode'],
             country=data['shipping']['country']
-        )
+        )'''
     return JsonResponse('Pago Enviado...', safe=False)
 
 
@@ -229,7 +239,7 @@ def set_profile(request):
 
 def profile_ship(request):
     customer = request.user.customer
-    ship, create = ShippingAddress.objects.filter(customer=customer)
+    ship, create = ShippingAddress.objects.get_or_create(customer=customer)
     if request.method == "POST":
         form = ShippingForm(request.POST, instance=ship)
         if form.is_valid():
