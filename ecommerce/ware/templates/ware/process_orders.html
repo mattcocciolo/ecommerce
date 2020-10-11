@@ -92,12 +92,14 @@
                 <br>
                 <strong>Pais:</strong> {{ship.address}}
             </div>
+            {% if order.processed == False %}
             <hr>
             <div class="der">
-                <a href="{%  url 'button_id' order.transaction_id %}" id="buttonId" class="btn btn-success"
+                <a href="{%  url 'button_id' order.transaction_id %}" id="buttonId" class="btn btn-dark"
                    type="submit">Finalizar</a>
             </div>
-       </div>
+            {% endif %}
+        </div>
     </div>
     {% endif %}
     {% endif %}

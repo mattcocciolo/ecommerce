@@ -25,7 +25,6 @@ def process_orders(request, pk_transaction_id):
     order = Order.objects.filter(transaction_id=pk_transaction_id)
     item = OrderItem.objects.all()
     ship = ShippingAddress.objects.all()
-
     context = {'orders': order, 'items': item, 'ships': ship}
     return render(request, 'ware/process_orders.html', context)
 

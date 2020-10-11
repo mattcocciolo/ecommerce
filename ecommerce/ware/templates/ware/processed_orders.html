@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row-orders">
     {% if group == 'admin' or group == 'employees'%}
-    <a class="btn btn-success" href="{% url 'orders' %}" style="float:right">Pedidos Pendientes</a>
+    <a class="btn btn-dark" href="{% url 'orders' %}" style="float:right">Pedidos Pendientes</a>
     {% endif %}
     <div class="title"><h2>Pedidos Procesados</h2></div>
     <br>
@@ -25,7 +25,7 @@
         <div class="col-right-d">
             <div class="center"><strong><p>{{order.date}}</p></strong></div>
         </div>
-        <a class="btn btn-success" href="{% url 'details' order.transaction_id %}" style="float:right">Ver Pedido</a>
+        <a class="btn btn-dark" href="{% url 'process_orders' order.transaction_id %}" style="float:right">Ver Pedido</a>
     </div>
     {% endif %}
     {% endfor %}
