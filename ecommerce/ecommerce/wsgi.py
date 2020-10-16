@@ -1,3 +1,4 @@
+# noinspection PyPackageRequirements
 """
 WSGI config for ecommerce project.
 

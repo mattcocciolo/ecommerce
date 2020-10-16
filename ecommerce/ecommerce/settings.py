@@ -22,9 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'z+ksf@)0d^qojbh4rnp4b1to$hq&*tt(3bs$gf(3i267g$k9ln'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mattcocciolo-ecommerce.herokuapp.com', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'ware.apps.WareConfig',
     'crispy_forms',
     'events',
-    'debug_toolbar',
-
 ]
 
 MIDDLEWARE = [
@@ -50,7 +48,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
@@ -130,9 +127,3 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'matiasdjangosmtp@gmail.com'
 EMAIL_HOST_PASSWORD = 'matias3063240'
-
-INTERNAL_IPS = [
-    # ...
-    '127.0.0.1',
-    # ...
-]
