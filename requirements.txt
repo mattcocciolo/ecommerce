@@ -64,7 +64,7 @@ pylint==2.6.0
 PyQt5==5.15.1
 PyQt5-sip==12.8.1
 PySocks==1.7.1
-python-augeas>=0.5.0
+#python-augeas>=0.5.0
 python-dateutil==2.8.1
 python-gettext==4.0
 python-manatools>=0.0.3
