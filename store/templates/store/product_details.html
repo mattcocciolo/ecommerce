@@ -13,7 +13,7 @@
         <div id="img-container">
             <div id="lens"></div>
             {% for product in products %}
-            <img id=featured src="{% static {{product.image.url}} %}">
+            <img id=featured src="{{product.image.url}}">
             {% endfor %}
         </div>
         <br>
