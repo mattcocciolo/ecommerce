@@ -57,7 +57,7 @@ pycups==2.0.1
 pycurl==7.43.0.5
 pyenchant==3.1.1
 Pygments>=2.4.2
-PyGObject==3.36.1
+#PyGObject==3.36.1
 pykickstart>=3.24
 pylint==2.6.0
 #pyparted==3.11.4
