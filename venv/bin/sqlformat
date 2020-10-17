@@ -1,4 +1,4 @@
-#!/home/mcocciolo/PycharmProjects/ecommerce_1.2(bug)/venv/bin/python3.8
+#!/home/mcocciolo/PycharmProjects/ecommerce/venv/bin/python3.8
 # -*- coding: utf-8 -*-
 import re
 import sys
