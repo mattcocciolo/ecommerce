@@ -80,7 +80,7 @@ requests-ftp==0.3.1
 #rpm>=4.15.1
 #selinux>=3.0
 #sepolicy>=3.0
-setools>=4.3.0
+#setools>=4.3.0
 shiboken2==5.15.1
 simplegeneric==0.8.1
 simpleline==1.7
