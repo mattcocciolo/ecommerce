@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'store.apps.StoreConfig',
     'ware.apps.WareConfig',
     #'crispy_forms',
-    'events',
+    #'events',
 ]
 
 MIDDLEWARE = [
