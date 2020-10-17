@@ -48,7 +48,7 @@ pipenv==2020.8.13
 productmd==1.28
 prompt-toolkit>=2.0.10
 ptyprocess==0.6.0
-pwquality>=1.4.2
+#pwquality>=1.4.2
 py==1.9.0
 pycairo==1.18.2
 pycodestyle>=2.5.0
