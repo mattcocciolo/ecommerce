@@ -119,7 +119,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-#MEDIA_URL = '/images/'
+MEDIA_URL = '/images/'
+
+import os.path
+root = os.path.dirname(__file__).replace('\\','/')
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 # SMTP Configuracion
