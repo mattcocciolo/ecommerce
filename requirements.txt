@@ -17,4 +17,3 @@ setuptools==50.3.1
 django-crispy-forms==1.9.2
 django-event-system==1.0.1
 pillow==8.0.0
-store==2020.2.10
