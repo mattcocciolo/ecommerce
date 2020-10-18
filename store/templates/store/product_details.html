@@ -20,13 +20,13 @@
         <br>
         <br>
         <div id="slide-wrapper">
-            <img class="arrow" id="slideLeft" src="/images/chevron-left.svg">
+            <img class="arrow" id="slideLeft" src="{% static "/images/chevron-left.svg" %}">
             <div id="slider">
                 {% for photo in photos %}
                 <img class="thumbnail active" src="{{photo.image_url}}">
                 {% endfor %}
             </div>
-            <img class="arrow" id="slideRight" src="/images/chevron-right.svg">
+            <img class="arrow" id="slideRight" src="{% static "/images/chevron-right.svg" %}">
         </div>
     </div>
 
