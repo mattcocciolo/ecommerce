@@ -294,8 +294,6 @@ def profile_passwd_update(request):
     return render(request, 'store/profile_passwd_update.html', context)
 
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['customers'])
 def product_details(request, pk_id):
     products = Product.objects.filter(id=pk_id)
     photos = ProductImages.objects.filter(product_id=pk_id)
