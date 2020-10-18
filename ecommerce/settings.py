@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'z+ksf@)0d^qojbh4rnp4b1to$hq&*tt(3bs$gf(3i267g$k9ln'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['mattcocciolo-ecommerce.herokuapp.com', '127.0.0.1']
 # Application definition
@@ -119,8 +119,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-MEDIA_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
+#MEDIA_URL = '/images/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 # SMTP Configuracion
 
