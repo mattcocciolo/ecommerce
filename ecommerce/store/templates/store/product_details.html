@@ -1,0 +1,65 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      rel="stylesheet">
+<link href="{% static 'css/product.css' %}" rel="stylesheet" type="text/css">
+
+<a class="btn btn-dark" href="{% url 'store' %}">&#8592;Atras</a>
+<hr>
+<div id="content-wrapper">
+    <div class="column">
+        <div id="img-container">
+            <div id="lens"></div>
+            {% for product in products %}
+            <img id=featured src="{{product.image.url}}">
+            {% endfor %}
+        </div>
+        <br>
+        <br>
+        <br>
+        <div id="slide-wrapper">
+            <img class="arrow" id="slideLeft" src="{% static '/images/chevron-left.svg' %}">
+            <div id="slider">
+                {% for photo in photos %}
+                <img class="thumbnail active" src="{{photo.image_url}}">
+                {% endfor %}
+            </div>
+            <img class="arrow" id="slideRight" src="{% static '/images/chevron-right.svg' %}">
+        </div>
+    </div>
+
+    <div class="column">
+        {% for product in products%}
+        <h1>{{product.name}}</h1>
+        <hr>
+        <h3>$ {{product.price}}</h3>
+        <p style="text-align: justify">{{product.description}}</p>
+
+        <button class="btn btn-success add-btn update-cart" data-action="add"
+                data-product="{{product.id}}">Agregar al Carrito
+        </button>
+        &nbsp&nbsp&nbsp
+        {% for item in items%}
+        {% if product.id == item.product.id %}
+
+        <p class="quantity">x{{item.quantity}}</p>
+        <div class="quantity">
+            <img class="chg-quantity update-cart" data-action="add"
+                 data-product="{{item.product.id}}" src="{% static  'images/arrow-up.png' %}">
+
+            <img class="chg-quantity update-cart" data-action="remove"
+                 data-product="{{item.product.id}}" src="{% static  'images/arrow-down.png' %}">
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+    </div>
+
+</div>
+
+<script src="{% static 'js/product-zoom.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/product-slider.js' %}" type="text/javascript"></script>
+
+{% endblock content %}

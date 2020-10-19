@@ -1,0 +1,110 @@
+{% extends 'ware/main_ware.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box-element">
+            <a class="btn btn-dark" href="{% url 'orders' %}">Atras</a>
+            <hr>
+            <h3>Resumen del Pedido</h3>
+            <hr>
+            {% for order in orders%}
+            <strong>Pedido N°:</strong> {{order.transaction_id}}
+            <br>
+            <strong>Fecha de Compra:</strong> {{order.date}}
+            {% endfor %}
+            <hr>
+            <div class="cart-row">
+                <div class="art-order">
+                    <div style="flex:3;"></div>
+                    <div class="description-order">
+                        <div style="flex:4;  "><strong><p>Descripcion</p></strong></div>
+                    </div>
+                    <div class="price-order">
+                        <div style="flex:2;display:flex; "><strong><p>Precio</p></strong></div>
+                    </div>
+                    <div class="quantity-order">
+                        <div style="flex:1; display:flex;"><strong><p>Cantidad</p></strong></div>
+                    </div>
+                </div>
+                {% for order in orders %}
+                {% for item in items %}
+                {% if order.transaction_id == item.order.transaction_id%}
+                <div class="art-order">
+                    <div style="flex:2"><img class="row-image-order" src={{item.product.image.url}}></div>
+                    <div style="flex:2"><p>{{item.product}}</p></div>
+                    <div class="price-order">
+                        <div style="flex:1"><p>$ {{item.product.price|floatformat:2}}</p></div>
+                    </div>
+                    <div class="quantity-order">
+                        <div style="flex:1"><p>x {{item.quantity}}</p></div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+                <hr>
+                {% for order in orders %}
+                <strong>Articulos:</strong> x {{order.get_cart_items}}
+                <br>
+                <strong>Total: </strong>$ {{order.get_cart_total|floatformat:2}}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% for order in orders%}
+    <div class="col-lg-6">
+        <div class="box-element" id="form-wrapper">
+            <div id="user-info">
+                <h3>Informacion Personal</h3>
+                <hr>
+                <div class="col-lg-6">
+                    <img class="row-image-order" src={{order.customer.profile_picture.url}}>
+                </div>
+                <div class="col-lg-12">
+                    <strong>Usuario:</strong> {{order.customer}}
+                    <br>
+                    <strong>Nombre:</strong> {{order.customer.first_name}}
+                    <br>
+                    <strong>Apellido:</strong> {{order.customer.last_name}}
+                    <br>
+                    <strong>Email:</strong> {{order.customer.email}}
+                </div>
+            </div>
+            {% endfor %}
+
+            {% for ship in ships %}
+            {% for order in orders %}
+            {% if ship.customer == order.customer %}
+            {% if order.complete %}
+            <div id="shipping-info">
+                <hr>
+                <h3>Informacion del Envio</h3>
+                <hr>
+                <strong>Direccion:</strong> {{ship.address}}
+                <br>
+                <strong>Ciudad:</strong> {{ship.city}}
+                <br>
+                <strong>Provincia:</strong> {{ship.state}}
+                <br>
+                <strong>Codigo Postal:</strong> {{ship.zipcode}}
+                <br>
+                <strong>Pais:</strong> {{ship.address}}
+            </div>
+            {% if order.processed == False %}
+            <hr>
+            <div class="der">
+                <a href="{%  url 'button_id' order.transaction_id %}" id="buttonId" class="btn btn-dark"
+                   type="submit">Finalizar</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+</div>
+
+{% endblock content %}
