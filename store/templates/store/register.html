@@ -1,0 +1,134 @@
+{% load static %}
+<title>Register</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+<link href="{% static 'css/forms.css' %}" rel="stylesheet" type="text/css">
+
+<br>
+<ul class="nav nav nav-fill">
+    <li class="nav-item">
+        <a class="btn btn-dark" href="{% url 'login' %}">&#8592;Atras</a>
+    </li>
+    <li class="nav-item">
+        ¿Tienes Una Cuenta?<a href="{% url 'login' %}" class="ml-2"><strong>Iniciar Sesion</strong></a>
+    </li>
+</ul>
+<div class="user_card_register">
+    <div class="title">
+        <h3 id="title">Registro de Cuenta</h3>
+    </div>
+    <div class="text-list">
+        <p>¡ADVERTENCIA! Su contraseña:</p>
+        <ul>
+            <li>No debe ser similar a su informacion de usuario.</li>
+            <li>Debe tener al menos 8 caracteres.</li>
+            <li>No puede ser una contraseña de uso comun.</li>
+            <li>No puede ser completamente numerica.</li>
+        </ul>
+    </div>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <h6 {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</h6>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h6>{{form.errors}}</h6>
+
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row-form">
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    {{form.username}}
+                </div>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    {{form.email}}
+                </div>
+            </div>
+        </div>
+
+        <div class="row-form">
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                    <div id="show_hide_password1">
+                        {{form.password1}}
+                        <span toggle="#password-field"
+                              class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                    <div id="show_hide_password2">
+                        {{form.password2}}
+                        <span toggle="#password-field"
+                              class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-form">
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    {{form.first_name}}
+                </div>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    {{form.last_name}}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="column2">
+            <div class="input-group-append-2 input-group-append">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                {{form_ship.address}}
+            </div>
+            <br>
+            <div class="input-group-append-2 input-group-append">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                {{form_ship.city}}
+            </div>
+            <br>
+            <div class="input-group-append-2 input-group-append">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                {{form_ship.state}}
+            </div>
+            <br>
+            <div class="input-group-append-2 input-group-append">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                {{form_ship.zipcode}}
+            </div>
+            <br>
+            <div class="input-group-append-2 input-group-append">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                {{form_ship.country}}
+            </div>
+            <br>
+            <div class="d-flex justify-content-center mt-3 login_container">
+                <input class="btn btn-dark" type="submit" value="Registrar Cuenta">
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script type="text/javascript" src="{% static 'js/register.js' %}"></script>
